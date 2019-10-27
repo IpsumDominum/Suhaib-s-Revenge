@@ -11,7 +11,7 @@ setInterval(function(){
   //ctx.canvas.width = ctx.parentNode.innerWidth;    
   //ctx.canvas.height = ctx.parentNode.innerHeight;    
     if(chosenMap){
-    ctx.clearRect(0,0,w,h);
+        ctx.clearRect(0,0,w,h);
     theplayer.update();
     drawMap();
     theplayer.draw();
@@ -40,8 +40,8 @@ setInterval(function(){
         counter++;
       }else{
         if(counter %wave_delay==0)
-        if(GAME_WAVE.length>0)
-          GAME_WAVE.pop().start_wave();
+            if(GAME_WAVE.length>0)
+               GAME_WAVE.pop().start_wave();
         }
         counter ++;
       }
@@ -75,7 +75,7 @@ img.onload = function() {};
 var drawScore = function(){
   var playerscore = 0;
   ctx.fillStyle = 'white';
-  ctx.fillText(playerscore,0,30);
+    ctx.fillText(playerscore,0,30);
 }
 var drawItems = function(){
 

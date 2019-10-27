@@ -3,8 +3,8 @@ HashTable = function(x,y){
     self.hp = 10;
     self.hpMax = 10;
     self.skin = "hashtable";
-    self.width = 0.2;
-    self.height = 0.2;
+    self.width = 0.1;
+    self.height = 0.1;
     self.spdX = 0;
     self.spdY = 0.005;
     self.traj = 0;
@@ -26,8 +26,8 @@ HashTable = function(x,y){
     }
     return self;
 }
-var audio = new Audio('https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3');
-audio.play();
+//var audio = new Audio('https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3');
+//audio.play();
 Dildo = function(x,y){
     var self = Enemy(x,y);        
     self.hp = 10;

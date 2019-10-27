@@ -1,0 +1,5 @@
+var m = Mission("mission1");
+m.add(HashTable(0.2,-0.2));
+m.add(HashTable(0.5,-0.2));
+m.add(HashTable(0.7,-0.2));
+m.add_wave("normal");

@@ -18,8 +18,11 @@ Entity = function(){
         else
            self.y = self.y;
     }
-    self.getDistance = function(pt){
-        return Math.sqrt(Math.pow(self.x-pt.x,2)+Math.pow(self.y-pt.y,2));
+    self.getCollision = function(pt){
+        if((Math.abs(self.x - pt.x)<= pt.width/2)&&(Math.abs(self.y - pt.y)<= pt.height/2)){
+            return true;
+        }        else
+            return false;
     }
     return self;
   }
@@ -116,7 +119,7 @@ Player = function(initPack){
         //var spdY = Math.sin(self.mouseAngle/180*Math.PI);
                 //player rectangle is     aw    
         var damage = ((self.hpMax-self.hp)/self.hpMax) *0.8;
-        ctx.drawImage(Img.player,w*theplayer.x-theplayer.width/2,h*theplayer.y-theplayer.height/2,w*theplayer.width,h*theplayer.height);
+        ctx.drawImage(Img.player,w*(theplayer.x-theplayer.width/3),h*(theplayer.y-theplayer.height/3),w*theplayer.width,h*theplayer.height);
         ctx.fillStyle = 'green';        
         ctx.fillRect(ctx.canvas.width*0.1,ctx.canvas.height*0.97,ctx.canvas.width*0.8,ctx.canvas.height*0.03);
         ctx.fillStyle = 'red';        
@@ -157,7 +160,7 @@ Bullet = function(initPack){
         if(self.parent=="player"){
         for(var enemy in Enemy.list){
             var e = Enemy.list[enemy];
-            if(self.getDistance(e)<0.05){
+            if(self.getCollision(e)){
                 e.hp -= self.bulletdamage;
                 if(e.hp<=0){                    
                     console.log('enemydied');
@@ -168,7 +171,7 @@ Bullet = function(initPack){
             }
         }
         }else if(self.parent=="enemy"){
-            if(self.getDistance(theplayer)<0.05){
+            if(self.getCollision(theplayer)){
                 theplayer.hp -=self.bulletdamage;                
                 self.tobeRemoved = true;
                 if(theplayer.hp<=0){
@@ -206,7 +209,17 @@ Bullet.list = {};
 Wave = function(initPack){
     var self = {};
     self.enemies = initPack.enemies;
+    if(initPack.type)
+        self.type = initPack.type;
+    else
+        self.type = "normal";
     self.start_wave = function(){
+        if(self.type=="boss"){
+            window.requestAnimationFrame(step);
+            info.style.color = "orange";
+            info.style.opacity = 1;
+            info.innerHTML = "Please choose a map first!";
+        }
         for(i=0;i<self.enemies.length;i++){
             Enemy.list[self.enemies[i].id] = self.enemies[i];
         }
@@ -214,7 +227,26 @@ Wave = function(initPack){
     return self;
 }
 
-
+Mission = function(missionname){
+    self = {};
+    self.missionname = missionname;
+    self.waves = [];
+    self.enemies = [];
+    self.add_wave = function(type){
+        var wave = Wave({
+            enemies:self.enemies,
+            type:type,
+        });
+        self.waves.push(wave);
+        self.enemies = [];
+    }
+    self.add = function(enemy){
+        self.enemies.push(enemy);
+    }
+    Mission.list[self.missionname] = self;
+    return self;
+}
+Mission.list = {};
 
 
 

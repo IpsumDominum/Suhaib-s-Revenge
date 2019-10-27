@@ -5,7 +5,7 @@ green.onclick = function(){
     green.style.border = "10px solid orange";
     white.style.border = "0px solid orange";
     blood.style.border = "0px solid orange";
-    choice = "green";
+    choice = "mission1";
 }
 blood.onclick = function(){
     green.style.opacity = 0.3;
@@ -14,7 +14,7 @@ blood.onclick = function(){
     green.style.border = "0px solid orange";
     white.style.border = "0px solid orange";
     blood.style.border = "10px solid orange";
-    choice = "blood";
+    choice = "mission2";
 }
 white.onclick = function(){
     green.style.opacity = 0.3;
@@ -23,7 +23,7 @@ white.onclick = function(){
     green.style.border = "0px solid orange";
     white.style.border = "10px solid orange";
     blood.style.border = "0px solid orange";
-    choice = "white";
+    choice = "mission3";
 }
 f1.onclick = function(){
     f1.style.opacity = 1;
@@ -61,6 +61,11 @@ choose_fighter_button.onclick = function(){
     }else{
         menu1.style.display = 'none';
         menu2.style.display = 'inline-block';
+        var missionmap = new Image();
+        missionmap.src = "/client/img/missionmap.png";
+        missionmap.onload = function(){
+            ctx.drawImage(missionmap,0,0,ctx.canvas.width,ctx.canvas.height);
+        };
         socket.emit('map_create',{map_choice:choice}); 
     }
 }
@@ -79,8 +84,8 @@ start_game_button.onclick = function(){
             hp:10,
             hpMax:10,
             username:"test",
-        });        
-        GAME_WAVE = MISSION1;
+        });
+        GAME_WAVE = Mission.list[choice].waves;
         menu2.style.display = 'none';
         socket.emit('map_create',{map_choice:choice}); 
     }

@@ -15,6 +15,7 @@ Enemy = function(x,y){
     self.bulletskin = "magic";
     self.bulletdamage = 1;
     self.bulletspeed = -4;
+    self.type = "normal";
     self.update = function(){
         var newx = (self.x +self.spdX)%1;        
         var newy = self.y +self.spdY;
@@ -47,11 +48,18 @@ Enemy = function(x,y){
         var w1 = health;
         var h1 = 0.01;
         ctx.drawImage(Img.enemy[self.skin],ex*w,ey*h,ew*w,eh*h);
+        if(self.type=="normal"){
         ctx.fillStyle = 'red';        
-        ctx.fillRect(w*x1,h*y1,w*w1,h*h1);
+            ctx.fillRect(w*x1,h*y1,w*w1,h*h1);
+        }else{
+            var health = (self.hp/self.hpMax) * 0.8;
+            ctx.fillStyle = 'red';        
+            ctx.fillRect(ctx.canvas.width*0.1,ctx.canvas.height*0.1,ctx.canvas.width*0.8,ctx.canvas.height*0.05);
+            ctx.fillStyle = 'green';        
+            ctx.fillRect(ctx.canvas.width*0.1,ctx.canvas.height*0.1,ctx.canvas.width*health,ctx.canvas.height*0.05);
+        }
     }
     return self;
 }
 
 Enemy.list = {};
-
