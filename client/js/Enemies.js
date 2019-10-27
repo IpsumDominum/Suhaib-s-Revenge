@@ -2,11 +2,11 @@ HashTable = function(x,y){
     var self = Enemy(x,y);        
     self.hp = 10;
     self.hpMax = 10;
-    self.skin = "player";
+    self.skin = "hashtable";
     self.width = 0.2;
     self.height = 0.2;
     self.spdX = 0;
-    self.spdY = 0.01;
+    self.spdY = 0.005;
     self.traj = 0;
     self.bulletskin = "magic";
     self.bulletdamage = 1;
@@ -14,17 +14,20 @@ HashTable = function(x,y){
     self.delay = 0;
     var superupdate = self.update;
     self.update = function(){
-        self.spdX = Math.sin(self.traj)/3;
+        self.y += self.spdY;
+        self.x += Math.cos(self.y*10)/50;
         if(self.delay%4==0){
             self.shootBullet("linear");
         }
         console.log(self.traj);
         self.traj +=self.spdY;
         self.delay ++;
-        superupdate();   
+//        superupdate();   
     }
     return self;
 }
+var audio = new Audio('https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3');
+audio.play();
 Dildo = function(x,y){
     var self = Enemy(x,y);        
     self.hp = 10;

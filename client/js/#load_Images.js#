@@ -16,7 +16,6 @@ addEnemyImage = function(name,source){
     Img.enemy[name].src = source;
     Img.enemy[name].onload = function(){};
 };
-
 addEnemyImage('bat','/client/img/bat.png');
 addEnemyImage('dildo','/client/img/dildo.png');
 addEnemyImage('hashtable', '/client/img/hashtable.png');
