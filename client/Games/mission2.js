@@ -4,5 +4,5 @@
 //HashTable: hashtable
 //Dildo : a dildo??
 var m = Mission("mission2");
-m.add(Dildo(0.2,-0.2));
-m.add_wave("normal");
+    m.add(Dildo(0.2,-0.2));
+    m.add_wave("normal");

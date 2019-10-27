@@ -9,11 +9,11 @@ Entity = function(){
     self.updatePosition = function(){
         var newx = self.x +self.spdX;
         var newy = self.y +self.spdY;
-        if(newx<=0.9 && newx >=-0.1)
+        if(newx<=(1-self.width/2) && newx >=(0))
            self.x =newx;
         else
            self.x = self.x;
-        if(newy<=0.9 && newy>=0.1)
+        if(newy<=(1-self.height/2) && newy>=(0))
            self.y =newy;
         else
            self.y = self.y;
@@ -62,8 +62,8 @@ Player = function(initPack){
     if(initPack){
     self.x = initPack.x;
     self.y = initPack.y;
-    self.width = 0.2;
-    self.height = 0.1;
+    self.width = 0.08;
+    self.height = 0.08;
     self.hp = initPack.hp;
     self.hpMax = initPack.hpMax;
     self.score = initPack.score;
@@ -82,12 +82,15 @@ Player = function(initPack){
     self.pressingDown = false;
     self.pressingUp = false;
     self.pressAttack = false;
+    self.pressingSpecial = false;
     var superupdate = self.update;
     self.update = function(){
        self.update_spd();
        superupdate();
        if(self.pressingAttack)
-          self.shootBullet(90);
+           self.shootBullet(90);
+        if(self.pressingSpecial)
+            self.special();
     }
     self.update_spd = function(){
         self.spdX = 0;
@@ -100,6 +103,19 @@ Player = function(initPack){
        self.spdX = -self.speedx;
        if(self.pressingRight)
        self.spdX = self.speedx;
+    }
+    self.special = function(){
+        for(i=0;i<180;i++){
+            Bullet({
+		parent:"player",
+                angle:i,
+		x:self.x,
+                y:self.y,
+                bulletskin:self.bulletskin,
+                bulletdamage:self.bulletdamage,            
+                bulletspeed:self.bulletspeed,
+	    });
+        }
     }
     self.shootBullet = function(angle){
         Bullet({
@@ -154,16 +170,15 @@ Bullet = function(initPack){
         self.x -= self.spdX;
         self.y -=self.spdY;
         if(self.x<0 ||self.x >1)    
-        self.tobeRemoved ==true;
+            self.tobeRemoved ==true;
         if(self.y<0 ||self.y >1)    
-        self.tobeRemoved ==true;
+            self.tobeRemoved ==true;
         if(self.parent=="player"){
         for(var enemy in Enemy.list){
             var e = Enemy.list[enemy];
             if(self.getCollision(e)){
                 e.hp -= self.bulletdamage;
                 if(e.hp<=0){                    
-                    console.log('enemydied');
                     theplayer.score +=10;
                     e.tobeRemoved = true;
                 }
@@ -186,11 +201,13 @@ Bullet = function(initPack){
         var height = 0.04;
         var ctxw = ctx.canvas.width;
         var ctxh = ctx.canvas.height;
-        var suhaibmode = false;
-            //console.log(self.x,self.y)ds
-        if(suhaibmode){
+        var suhaibmode = true;
+        if(suhaibmode &&self.parent=="player"){
             var cha = (Math.floor(Math.random()*255)+1536).toString(16).toUpperCase();
-            ctx.fillText(eval("'\\u0"+ cha+"'"),x-width/2,y-height/2);
+            ctx.font = "10px Arial";
+            var bulletx = ctxw*(self.x)-width/2;
+            var bullety = ctxh*(self.y)-height/2;
+            ctx.fillText(eval("'\\u0"+ cha+"'"),bulletx,bullety);
         }
         else{
             var bulletx = ctxw*(self.x)-width/2;

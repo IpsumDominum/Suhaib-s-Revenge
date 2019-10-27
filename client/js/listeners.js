@@ -9,7 +9,9 @@ document.onkeydown = function(event){
     else if(event.keyCode===87)
     theplayer.pressingUp = true;
     else if(event.keyCode===75)
-    theplayer.pressingAttack = true;
+        theplayer.pressingAttack = true;
+    else if(event.keyCode===32)
+        theplayer.pressingSpecial = true;
 
 }
 document.onkeyup = function(event){
@@ -22,7 +24,9 @@ document.onkeyup = function(event){
     else if(event.keyCode===87)
     theplayer.pressingUp = false;
     else if(event.keyCode===75)
-    theplayer.pressingAttack = false;
+        theplayer.pressingAttack = false;
+    else if(event.keyCode===32)
+        theplayer.pressingSpecial = false;
 }
 document.onmousedown = function(event){
     //theplayer.pressingAttack = true;

@@ -36,6 +36,19 @@ Enemy = function(x,y){
                 bulletspeed:self.bulletspeed,
             });  
         }
+        if(type=="fan"){
+            for(i=180;i<360;i+=10){
+            Bullet({
+                parent:"enemy",
+                angle:i,
+                x:self.x,
+                y:self.y,
+                bulletskin:self.bulletskin,
+                bulletdamage:self.bulletdamage,            
+                bulletspeed:self.bulletspeed,
+            });
+            }
+        }
     }
     self.draw = function(){
         var ex = self.x-self.width/2;

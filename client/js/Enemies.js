@@ -19,7 +19,6 @@ HashTable = function(x,y){
         if(self.delay%4==0){
             self.shootBullet("linear");
         }
-        console.log(self.traj);
         self.traj +=self.spdY;
         self.delay ++;
 //        superupdate();   
