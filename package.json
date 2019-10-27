@@ -1,0 +1,19 @@
+{
+  "name": "shittygame",
+  "version": "1.0.0",
+  "description": "a shitty game made by a shitty developer",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io":"^1.4.5",
+    "mongojs":"^3.0.0"
+  },
+  "engines":{
+    "node":"8.10.0"  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "shittyDev",
+  "license": "ISC"
+}

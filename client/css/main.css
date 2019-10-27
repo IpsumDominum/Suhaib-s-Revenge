@@ -1,0 +1,70 @@
+body, html {
+    height: 100%;
+  }
+  *, *::after, *::before {
+	-webkit-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-app-region: no-drag;
+	cursor: default;
+}
+
+  .bg {
+    /* The image used */
+    background-image: url("/client/img/university-blood.png");
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .levelmaker{
+/* The image used */
+    /* Center and scale the image nicely */
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left:500px;
+  }
+  .bg-game{
+    /* The image used */
+    background-image: url("/client/img/owheo.jpg");
+    background-size:100%;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    width:1000;
+    height:500;
+    transform: translate(-50%, -50%);
+  }
+  .bg-choose{
+    /* The image used */    
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    width:70%;
+    height:100%;
+    transform: translate(-50%, -50%);
+  }
+  .bg-menu {
+    /* The image used 
+    background-color: #FF4136;
+    */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .login-box {
+    background-color: #FF4136;
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+  }

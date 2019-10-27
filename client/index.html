@@ -1,0 +1,142 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="client/css/main.css">
+<link rel="stylesheet" href="client/css/another.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+<div class="bg"style="position:absolute">
+    
+</div>
+<div class="login-box "id="signDiv">
+    <div class="container">
+        <br>
+        <br>
+Username:<input class="form-control"id="signDiv-username" type="text"></input><br>
+Password:<input type="password" class="form-control"id="signDiv-password" type="password"></input>
+<button class="btn btn-warning"id="signDiv-signIn">Sign In</button>
+<button class="btn btn-warning" id="signDiv-signUp">Sign Up</button>
+</div>
+</div>
+<div class="bg" id="menuDiv">
+    <div id="gameover">
+    <h2>Game Over</h2>
+    <p>press <span style="background-color: #FFFFFF; color: #000000">space</span> to begin a</p>
+    <a id="newgame_gameover">new game</a>
+    <a id="setting_gameover">settings</a>
+    </div>
+<!-- Main Menu Screen -->
+    <div class="bg-menu" id="menu">
+    <!--<h2>Procrastifest:revenge of suhaib</h2>-->
+    <a id="campaign_menu">new game</a>
+    <a id="highscore_menu">highscores</a>
+    <a id="setting_menu">settings</a>
+    <a id="credits_menu">credits</a>
+    </div>
+</div>
+
+<div class="bg-choose" id="target" style="display:none;border:1px solid #000000;">
+        <canvas id="ctx" style="border:1px solid blue;"></canvas>
+                <div class="bg-menu" id="menu3">
+                        Choose your fighter
+                        <div class="row">
+                        <div class="column-3">
+                            <img src="client/img/suhaib.png" id="f1" width="150"height="150">
+                            <p style="background:#000000" > Suhaib</p>
+                            <p style="font-size:20px">attack ★★☆☆☆</p>
+                            <p style="font-size:20px">defence ★★★★☆</p>
+                            <p style="font-size:20px">agility ☆☆☆☆☆</p>
+                            
+                        </div>
+                        <div class="column-2">
+                        <img src="client/img/player.png" id="f2"width="150"height="150">
+                            <p style="background:#000000"> noob</p>
+                            <p style="font-size:20px">attack ★★★☆☆</p>
+                            <p style="font-size:20px">defence ★★☆☆☆</p>
+                            <p style="font-size:20px">agility ★★★☆☆</p>
+                        </div>
+                        <div class="column-2">
+                        <img src="client/img/Brendan McCane.jpg" id="f3"width="150"height="150">
+                            <p style="background:#000000"> Brendan (locked) </p>
+                            <p style="font-size:20px">attack ★★☆☆☆</p>
+                            <p style="font-size:20px">defence ★★★★☆</p>
+                            <p style="font-size:20px">agility ☆☆☆☆☆</p>
+                        </div>
+                        </div>
+                        <button class="btn btn-warning"id="choose-fighter"style="width:600px"><strong>Choose</strong></button>
+                        <p id="info"style="position:absolute"></p>
+                        </div>
+            <div class="bg-menu" id="menu2" style="display:none">
+        Choose a chapter
+        <div class="row">
+        <div class="column-2">
+            <img src="client/img/map.png" id="green" width="150"height="150">
+            <p> green</p>
+        </div>
+        <div class="column-2">
+        <img src="client/img/map2.png" id="blood"width="150"height="150">
+            <p> bloodshed otago </p>
+        </div>
+        <div class="column-2">
+        <img src="client/img/map3.png" id="white"width="150"height="150">
+            <p> white </p>
+        </div>
+        </div>
+        <button class="btn btn-warning"id="start-game"style="width:600px"><strong>Begin</strong></button>
+        <p id="info"style="position:absolute"></p>
+        </div>  
+</div>
+
+
+<script src="client/js/ClientEntity.js"></script>
+<script src="client/js/listeners.js"></script>
+<script src="client/js/render.js"></script>
+<script src="client/js/switch_screen.js"></script>
+<script src="client/js/newgame.js"></script>
+<script src="client/js/onclicks.js"></script>
+<script src="client/js/Enemies.js"></script>
+<script src="client/js/load_Images.js"></script>
+<script src="client/js/Enemy_Entity.js"></script>
+<script src="client/Games/mission1.js"></script>
+<script>
+    var WIDTH = 800;
+    var HEIGHT = 800;
+     var socket = io();
+     var theplayer = Player();
+   
+var toMenu = function(){
+    showScreen(2);
+  }
+
+    var signDiv = document.getElementById('signDiv');
+    var signDivUsername = document.getElementById('signDiv-username');
+    var signDivSignIn = document.getElementById('signDiv-signIn');
+    var signDivSignUp = document.getElementById('signDiv-signUp');
+    var signDivPassword = document.getElementById('signDiv-password');
+    signDivSignIn.onclick = function(){
+        socket.emit('signIn',{username:signDivUsername.value,password:signDivPassword.value});
+    }
+    signDivSignUp.onclick = function(){
+        socket.emit('signUp',{username:signDivUsername.value,password:signDivPassword.value});
+    }
+socket.on('signInResponse',function(data){
+    if(data.success){
+        showScreen(2);
+    } else
+        alert("Sign in unsuccessul.");
+});
+socket.on('signUpResponse',function(data){
+    if(data.success){
+        alert("Sign up successul.");
+    } else
+        alert("Sign up unsuccessul.");
+});
+
+//game
+
+ctx.font = '30px Arial';
+ctxUi.font = '30px Arial';
+var lastScore = null;
+</script>

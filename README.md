@@ -1,1 +1,2 @@
-# Suhaib-s-Revenge
+# She-yeti-Game
+She-yeti, the game :)
