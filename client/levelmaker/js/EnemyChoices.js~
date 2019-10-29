@@ -1,0 +1,3 @@
+add_enemy_choice("Dildo","client/img/dildo.png");
+add_enemy_choice("Hash Table","client/img/hashtable.png");
+add_enemy_choice("French Guy","client/img/frenchguy.png");

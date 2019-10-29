@@ -17,12 +17,21 @@ Enemy = function(x,y){
     self.bulletspeed = -4;
     self.type = "normal";
     self.update = function(){
-        var newx = (self.x +self.spdX)%1;        
-        var newy = self.y +self.spdY;
-        if(newy>1)    
-        self.tobeRemoved =true;
-        self.x = newx;
-        self.y = newy;
+        if(self.y>1)
+            self.tobeRemoved =true;
+        if(self.getCollision(theplayer)){
+            theplayer.hp -= 10;                
+            self.tobeRemoved = true;
+            if(theplayer.hp<=0){
+                alert("you died");
+            }
+        }
+    }
+    self.getCollision = function(pt){
+        if((Math.abs(self.x - pt.x)<= pt.width/2)&&(Math.abs(self.y - pt.y)<= pt.height/2)){
+            return true;
+        }        else
+            return false;
     }
     self.shootBullet = function(type){
         if(type=="linear"){
@@ -62,7 +71,7 @@ Enemy = function(x,y){
         var h1 = 0.01;
         ctx.drawImage(Img.enemy[self.skin],ex*w,ey*h,ew*w,eh*h);
         if(self.type=="normal"){
-        ctx.fillStyle = 'red';        
+            ctx.fillStyle = 'red';        
             ctx.fillRect(w*x1,h*y1,w*w1,h*h1);
         }else{
             var health = (self.hp/self.hpMax) * 0.8;
@@ -76,3 +85,5 @@ Enemy = function(x,y){
 }
 
 Enemy.list = {};
+BOSSES = {};
+ENEMIES = {};

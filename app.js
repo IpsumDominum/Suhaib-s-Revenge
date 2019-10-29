@@ -8,7 +8,7 @@ app.get('/',function(req,res){
     res.sendFile(__dirname + '/client/index.html');
 });
 app.get('/levelmaker',function(req,res){
-    res.sendFile(__dirname + '/client/levelmaker.html');
+    res.sendFile(__dirname + '/client/levelmaker/levelmaker.html');
 });
 app.use('/client',express.static(__dirname + '/client'));
 serv.listen(process.env.PORT||2000);
@@ -39,6 +39,15 @@ var addUser = function(data,cb){
     db.account.insert({username:data.username,password:data.password},function(err){
         cb();
     }); 
+}
+var savefile = function(data){
+    var fs = require('fs');
+    fs.writeFile("map.txt", data, function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+
 }
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
@@ -78,6 +87,10 @@ io.sockets.on('connection', function(socket){
 		var res = eval(data);
 		socket.emit('evalAnswer',res);		
 	});
+    socket.on('save',function(data){
+        console.log(data);
+        savefile(data);
+    });
 });
 
 /*

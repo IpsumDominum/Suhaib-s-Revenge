@@ -16,11 +16,14 @@ var ctxUi = document.getElementById("ctx").getContext("2d");
  // Buttons
  var button_campaign_menu = document.getElementById("campaign_menu");
  var button_highscores_menu = document.getElementById("highscore_menu");
- var button_setting_menu = document.getElementById("setting_menu");
+var button_setting_menu = document.getElementById("setting_menu");
  //button_newgame_setting = document.getElementById("newgame_setting");
  //button_newgame_gameover = document.getElementById("newgame_gameover");
  //button_setting_gameover = document.getElementById("setting_gameover");
 
+var levelmaker = function(){
+    window.location.href="/levelmaker";
+}
 // --------------------
 showScreen = function(screen_opt){
           switch(screen_opt){

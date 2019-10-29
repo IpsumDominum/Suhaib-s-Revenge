@@ -2,20 +2,24 @@ Img = {};
 Img.player = new Image();
 Img.player.src = '/client/img/suhaib.png';
 Img.player.onload = function() {};
-
+Img.bg = new Image();
+Img.bg.src = '/client/img/map.png';
+Img.bg.onload = function() {};
 Img.enemy = {};
-addEnemyImage = function(name,source){
+addEnemySkin= function(name,source){
     Img.enemy[name]= new Image();
     Img.enemy[name].src = source;
     Img.enemy[name].onload = function(){};
 }
 
-addEnemyImage('bat','/client/img/bat.png');
-addEnemyImage('frenchguy','/client/img/frenchguy.png');
-addEnemyImage('brendan','/client/img/Brendan McCane.jpg');
-addEnemyImage('dildo','/client/img/dildo.png');
-addEnemyImage('hashtable', '/client/img/hashtable.png');
-addEnemyImage('player', '/client/img/player.png');
+addEnemySkin('bat','/client/img/bat.png');
+addEnemySkin('frenchguy','/client/img/frenchguy.png');
+addEnemySkin('brendan','/client/img/Brendan McCane.jpg');
+addEnemySkin('dildo','/client/img/dildo.png');
+addEnemySkin('redblack','/client/img/redblack.png');
+addEnemySkin('graph','/client/img/graph.png');
+addEnemySkin('hashtable', '/client/img/hashtable.png');
+addEnemySkin('player', '/client/img/player.png');
 
 Img.bullet = {}
 addBulletImage = function(name,source){
@@ -26,4 +30,5 @@ addBulletImage = function(name,source){
 addBulletImage('magic','/client/img/bullet.png');
 addBulletImage('sperm','/client/img/sperm.png');
 addBulletImage('wine','/client/img/wine.png');
+addBulletImage('blackball','/client/img/blackball.png');
 

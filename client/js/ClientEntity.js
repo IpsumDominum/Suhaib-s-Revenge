@@ -70,10 +70,9 @@ Player = function(initPack){
     self.username = initPack.username;
     self.spdX = 0;
     self.spdY = 0;
-    self.speed = 8;
-    self.speedx = (self.speed)/ctx.canvas.width;     
-    self.speedy = (self.speed/4)/ctx.canvas.height;
-    self.bulletspeed = 8;
+    self.speedx = 0.02;     
+    self.speedy = 0.02;
+    self.bulletspeed = 0.03;
     self.bulletdamage = 1;
     self.bulletskin = "magic";
     }
@@ -162,17 +161,17 @@ Bullet = function(initPack){
     self.bulletdamage = initPack.bulletdamage;
     self.bulletskin = initPack.bulletskin;
     self.bulletspeed = initPack.bulletspeed;
-    self.spdX = (Math.cos(initPack.angle/180*Math.PI) * self.bulletspeed)/ctx.canvas.width;
-    self.spdY = (Math.sin(initPack.angle/180*Math.PI) * self.bulletspeed/4)/ctx.canvas.height;
+    self.spdX = (Math.cos(initPack.angle/180*Math.PI) * self.bulletspeed);
+    self.spdY = (Math.sin(initPack.angle/180*Math.PI) * self.bulletspeed);
     superupdate = self.update;
     self.tobeRemoved = false;
     self.update = function(){
         self.x -= self.spdX;
         self.y -=self.spdY;
         if(self.x<0 ||self.x >1)    
-            self.tobeRemoved ==true;
+            self.tobeRemoved =true;
         if(self.y<0 ||self.y >1)    
-            self.tobeRemoved ==true;
+            self.tobeRemoved =true;
         if(self.parent=="player"){
         for(var enemy in Enemy.list){
             var e = Enemy.list[enemy];
@@ -187,10 +186,10 @@ Bullet = function(initPack){
         }
         }else if(self.parent=="enemy"){
             if(self.getCollision(theplayer)){
-                theplayer.hp -=self.bulletdamage;                
+                theplayer.hp -=self.bulletdamage;
                 self.tobeRemoved = true;
                 if(theplayer.hp<=0){
-                    alert('hi you died');
+                    alert("you died");
                 }
             }
         }   

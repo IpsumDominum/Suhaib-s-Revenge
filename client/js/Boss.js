@@ -10,7 +10,7 @@ Brendan = function(x,y){
     self.traj = 0;
     self.bulletskin = "magic";
     self.bulletdamage = 2;
-    self.bulletspeed = 8;
+    self.bulletspeed = 0.02;
     self.delay = 0;
     self.type = "boss";
     var superupdate = self.update;
@@ -38,7 +38,7 @@ FrenchGuy = function(x,y){
     self.spdY = 0.005;
     self.bulletskin = "wine";
     self.bulletdamage = 2;
-    self.bulletspeed = 8;
+    self.bulletspeed = 0.02;
     self.attackSpeed = 10;
     self.type = "boss";
     self.state = "";
@@ -88,3 +88,8 @@ FrenchGuy = function(x,y){
     }
     return self;
 };
+
+///
+BOSSES.Brendan = Brendan(0,0);
+BOSSES.FrenchGuy = FrenchGuy(0,0);
+///

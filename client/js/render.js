@@ -2,6 +2,8 @@ counter = -40;
 wave_delay = 200;
 active_waves = [];
 setInterval(function(){
+  ctx.canvas.width = window.innerWidth * 0.6;
+  ctx.canvas.height = window.innerHeight;
   w = ctx.canvas.width;
   h = ctx.canvas.height;
   
@@ -19,7 +21,7 @@ setInterval(function(){
      var bullet = Bullet.list[bulletidx];
      //console.log(bullet);
       bullet.update();
-      if(bullet.tobeRemoved){
+        if(bullet.tobeRemoved){
         delete Bullet.list[bulletidx];
       }
       else{
@@ -29,8 +31,8 @@ setInterval(function(){
     for(var enemyidx in Enemy.list){
       var enemy = Enemy.list[enemyidx];
       enemy.update();      
-      if(enemy.tobeRemoved){
-        delete Enemy.list[enemyidx];
+        if(enemy.tobeRemoved==true){ 
+            delete Enemy.list[enemyidx];
       }
       else{
         enemy.draw();
@@ -41,7 +43,10 @@ setInterval(function(){
       }else{
         if(counter %wave_delay==0)
             if(GAME_WAVE.length>0)
-               GAME_WAVE.pop().start_wave();
+                GAME_WAVE.pop().start_wave();
+          else{
+              alert("you won!!!");
+          }
         }
         counter ++;
       }
@@ -49,6 +54,7 @@ setInterval(function(){
     //drawItems();
 
 },40);
+
 uninitialized = true;
 var drawMap = function(){
   if(uninitialized===true){
@@ -56,10 +62,8 @@ var drawMap = function(){
        count2 = 0;
      uninitialized = false;
   }
-  let img = new Image();
-img.src = '/client/img/map3.png';
-img.onload = function() {};
-  var scrollspeed = 2;
+
+  var scrollspeed = ctx.canvas.height*0.005;
   count1 = count1+scrollspeed;
   count2 = count2+scrollspeed;
   if(count1>=h){
@@ -68,8 +72,8 @@ img.onload = function() {};
   if(count2>=h){
       count2 = -h;
     }
-  ctx.drawImage(img,0,count1,w,h);
-  ctx.drawImage(img,0,count2,w,h);
+  ctx.drawImage(Img.bg,0,count1,w,h);
+  ctx.drawImage(Img.bg,0,count2,w,h);
 
 }
 var drawScore = function(){
