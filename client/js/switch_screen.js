@@ -15,7 +15,8 @@ var ctxUi = document.getElementById("ctx").getContext("2d");
  // Screens
  // Buttons
  var button_campaign_menu = document.getElementById("campaign_menu");
- var button_highscores_menu = document.getElementById("highscore_menu");
+var button_highscores_menu = document.getElementById("highscore_menu");
+var button_custom_menu = document.getElementById("custom_menu");
 var button_setting_menu = document.getElementById("setting_menu");
  //button_newgame_setting = document.getElementById("newgame_setting");
  //button_newgame_gameover = document.getElementById("newgame_gameover");
@@ -25,6 +26,7 @@ var levelmaker = function(){
     window.location.href="/levelmaker";
 }
 // --------------------
+newgamemode = "waiting";
 showScreen = function(screen_opt){
           switch(screen_opt){
             
@@ -37,8 +39,8 @@ showScreen = function(screen_opt){
               case 1:  signDiv.style.display = 'none';
                         menuDiv.style.display = 'none';
                         menubg.style.backgroundImage = "url('/client/img/Brendan McCane.jpg')";
-                        chooseDiv.style.display = 'inline-block';
-                        Multiplayer= true;
+              chooseDiv.style.display = 'inline-block';
+              newgamemode = "campagin";
                        break;
 
               case 2:  signDiv.style.display = 'none';
@@ -47,18 +49,22 @@ showScreen = function(screen_opt){
                        break;
                   
               case 3: signDiv.style.display = 'none';
-              menuDiv.style.display = 'inline-block';
-              menubg.style,display = 'none';
-              chooseDiv.style.display = 'none';
+                      menuDiv.style.display = 'none';
+                      menubg.style,display = 'none';
+              chooseDiv.style.display = 'inline-block';
+              newgamemode = "customgames";
+              
                       break;
             case 4: signDiv.style.display = 'none';
                     menuDiv.style.display = 'none';
                       menubg.style,display = 'none';
-                    chooseDiv.style.display = 'none';
-                      break;
+                  chooseDiv.style.display = 'none';
+                   break;
           }
       }
 showScreen(0);
 button_campaign_menu.onclick = function(){showScreen(1);};
+button_custom_menu.onclick = function(){showScreen(3);};
 button_highscores_menu.onclick = function(){showScreen(2);};
 button_setting_menu.onclick = function(){showScreen(2);};
+

@@ -40,9 +40,23 @@ var addUser = function(data,cb){
         cb();
     }); 
 }
-var savefile = function(data){
+ALL_MAPS = [];
+var load_all_custom_maps = function(){
     var fs = require('fs');
-    fs.writeFile("map.txt", data, function(err) {
+    let rawdata = fs.readFileSync('maps.json');
+    ALL_MAPS = JSON.parse(rawdata);
+}
+var savefile = function(name,data){
+    jsondata = JSON.stringify(data);
+    ALL_MAPS.push(name);
+    json_allmaps = JSON.stringify(ALL_MAPS);
+    var fs = require('fs');
+    fs.writeFile("maps.json", json_allmaps, function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+    fs.writeFile("client/custom_maps/"+name+".json", jsondata, function(err) {
         if (err) {
             console.log(err);
         }
@@ -51,7 +65,8 @@ var savefile = function(data){
 }
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
-	socket.id = Math.random();
+        socket.id = Math.random();
+        load_all_custom_maps();
 	if(!DEBUG){
 	socket.on('signIn',function(data){		
 		isValidPassword(data,function(res){
@@ -88,8 +103,7 @@ io.sockets.on('connection', function(socket){
 		socket.emit('evalAnswer',res);		
 	});
     socket.on('save',function(data){
-        console.log(data);
-        savefile(data);
+        savefile(data.name,data.waves);
     });
 });
 

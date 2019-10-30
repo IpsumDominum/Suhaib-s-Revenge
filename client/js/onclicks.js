@@ -5,6 +5,7 @@ green.onclick = function(){
     green.style.border = "10px solid orange";
     white.style.border = "0px solid orange";
     blood.style.border = "0px solid orange";
+    endless.style.border = "0px solid orange";
     choice = "mission1";
 }
 blood.onclick = function(){
@@ -14,6 +15,7 @@ blood.onclick = function(){
     green.style.border = "0px solid orange";
     white.style.border = "0px solid orange";
     blood.style.border = "10px solid orange";
+    endless.style.border = "0px solid orange";
     choice = "mission2";
 }
 white.onclick = function(){
@@ -23,7 +25,18 @@ white.onclick = function(){
     green.style.border = "0px solid orange";
     white.style.border = "10px solid orange";
     blood.style.border = "0px solid orange";
+    endless.style.border = "0px solid orange";
     choice = "mission3";
+}
+endless.onclick = function(){
+    green.style.opacity = 0.3;
+    blood.style.opacity = 0.3;
+    white.style.opacity = 1;
+    green.style.border = "0px solid orange";
+    white.style.border = "0px solid orange";
+    blood.style.border = "0px solid orange";
+    endless.style.border = "10px solid orange";
+    choice = "missionimpossible";
 }
 f1.onclick = function(){
     f1.style.opacity = 1;
@@ -85,7 +98,7 @@ start_game_button.onclick = function(){
             hpMax:10,
             username:"test",
         });
-        GAME_WAVE = Mission.list[choice].waves;
+        GAME_MISSION = Mission.list[choice];
         menu2.style.display = 'none';
         socket.emit('map_create',{map_choice:choice}); 
     }

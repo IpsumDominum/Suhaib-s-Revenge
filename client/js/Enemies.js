@@ -17,7 +17,7 @@ HashTable = function(x,y){
     self.update = function(){
         superupdate();   
         self.y += self.spdY;
-        self.x += Math.cos(self.y*10)/50;
+        self.x = (self.x+(Math.cos(self.y*10)/50))%1;
         if(self.delay%self.attackspd==0){
             self.shootBullet("linear");
         }
@@ -48,7 +48,7 @@ Dildo = function(x,y){
     self.update = function(){
         superupdate();   
         self.y += self.spdY;
-        self.x += Math.cos(self.y*10)/50;
+        self.x = (self.x+(Math.cos(self.y*10)/50))%1;
         if(self.delay%self.attackspd==0){
             self.shootBullet("linear");
         }
@@ -71,13 +71,13 @@ RedBlack = function(x,y){
     self.bulletskin = "blackball";
     self.bulletdamage = 1;
     self.bulletspeed = 0.02;
-    self.attackspd = 10;
+    self.attackspd = 20;
     self.delay = 0;
     var superupdate = self.update;
     self.update = function(){
         superupdate();   
         self.y += self.spdY;
-        self.x += Math.cos(self.y*10)/50;
+        self.x = (self.x+(Math.cos(self.y*10)/50))%1;
         if(self.delay%self.attackspd==0){
             self.shootBullet("fan");
         }
@@ -106,7 +106,7 @@ Graph = function(x,y){
     self.update = function(){
         superupdate();   
         self.y += self.spdY;
-        self.x += Math.cos(self.y*10)/100;
+        self.x = (self.x+(Math.cos(self.y*10)/50))%1;
         if(self.delay%self.attackspd==0){
             self.shootBullet("linear");
         }

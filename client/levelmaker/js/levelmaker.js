@@ -223,6 +223,7 @@ map_create_button.onclick = function(){
         info.style.opacity = 1;
         info.innerHTML = "Please give the map a name!";
     }else{
+        map_name_value = map_name.value;
         chosenMap = true;
         menu.style.display = 'none';
         wavesbox.style.display = 'inline-block';
@@ -285,5 +286,5 @@ var switchTab = function(tab){
         }
 }
 savebutton.onclick = function(){
-    socket.emit("save",WAVES);
+    socket.emit("save",{name:map_name_value,waves:WAVES});
  }

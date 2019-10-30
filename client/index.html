@@ -30,10 +30,11 @@ Password:<input type="password" class="form-control"id="signDiv-password" type="
 <!-- Main Menu Screen -->
     <div class="bg-menu" id="menu">
     <!--<h2>Procrastifest:revenge of suhaib</h2>-->
-    <a id="campaign_menu">new game</a>
-    <a id="highscore_menu">highscores</a>
-    <a id="setting_menu">settings</a>
-    <a id="credits_menu">credits</a>
+    <a id="campaign_menu">New Game</a>
+    <a id="custom_menu">Custom Game</a>
+    <a id="highscore_menu">Highscores</a>
+    <a id="setting_menu">Settings</a>
+    <a id="credits_menu">Credits</a>
     <a onclick="levelmaker()" id="levelmaker_menu">levelmaker</a>
     </div>
 </div>
@@ -84,6 +85,10 @@ Password:<input type="password" class="form-control"id="signDiv-password" type="
         <img src="client/img/map3.png" id="white"width="150"height="150">
             <p> Level3 </p>
         </div>
+        <div class="column-2" style="position:absolute;top:-90%;left:-10%">
+          <img src="client/img/Brendan McCane.jpg" id="endless" width="150"height="150">
+          <p> Endless Mode</p>
+        </div>
         </div>
         <button class="btn btn-warning"id="start-game"style="position:absolute;left:0%;top:600%;width:100%;font-size:40px"><strong>Begin </button>
             </div>
@@ -97,6 +102,7 @@ Password:<input type="password" class="form-control"id="signDiv-password" type="
 <script src="client/js/switch_screen.js"></script>
 <script src="client/js/newgame.js"></script>
 <script src="client/js/onclicks.js"></script>
+<script src="client/js/Bullet_Entity.js"></script>
 <script src="client/js/Enemy_Entity.js"></script>
 <script src="client/js/Enemies.js"></script>
 <script src="client/js/load_Images.js"></script>
@@ -104,6 +110,7 @@ Password:<input type="password" class="form-control"id="signDiv-password" type="
 <script src="client/Games/mission1.js"></script>
 <script src="client/Games/mission2.js"></script>
 <script src="client/Games/mission3.js"></script>
+<script src="client/Games/missionimpossible.js"></script>
 <script>
     var WIDTH = 800;
     var HEIGHT = 800;

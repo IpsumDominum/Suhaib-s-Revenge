@@ -1,6 +1,11 @@
 counter = -40;
-wave_delay = 200;
+wave_delay = 100;
 active_waves = [];
+cur_wave = {};
+cur_wave.is_finished = function(){
+    return true;
+}
+last_wave = true;
 setInterval(function(){
   ctx.canvas.width = window.innerWidth * 0.6;
   ctx.canvas.height = window.innerHeight;
@@ -14,48 +19,77 @@ setInterval(function(){
   //ctx.canvas.height = ctx.parentNode.innerHeight;    
     if(chosenMap){
         ctx.clearRect(0,0,w,h);
-    theplayer.update();
-    drawMap();
-    theplayer.draw();
-    for(var bulletidx in Bullet.list){
-     var bullet = Bullet.list[bulletidx];
-     //console.log(bullet);
-      bullet.update();
-        if(bullet.tobeRemoved){
-        delete Bullet.list[bulletidx];
-      }
-      else{
-        bullet.draw();
-      }
+        theplayer.update();
+        drawMap();
+        theplayer.draw();
+        draw_bullets();
+        draw_enemies();
+        if(counter<0){
+            counter++;
+        }else{
+            if(choice =="missionimpossible"){
+                var morewaves = true;
+            }else{
+                var morewaves= (GAME_MISSION.waves.length)>0;
+            }
+            if(morewaves){
+                next_wave();
+            }else{
+                if(last_wave){
+                    next_wave();
+                    last_wave = false;
+                }
+                alert("you won!!!");
+            }}
+            counter ++;
+        //drawScore();
+        //drawItems();
     }
-    for(var enemyidx in Enemy.list){
-      var enemy = Enemy.list[enemyidx];
-      enemy.update();      
-        if(enemy.tobeRemoved==true){ 
-            delete Enemy.list[enemyidx];
-      }
-      else{
-        enemy.draw();
-      }
-    }
-      if(counter<0){
-        counter++;
-      }else{
-        if(counter %wave_delay==0)
-            if(GAME_WAVE.length>0)
-                GAME_WAVE.pop().start_wave();
-          else{
-              alert("you won!!!");
-          }
-        }
-        counter ++;
-      }
-    //drawScore();
-    //drawItems();
-
 },40);
 
 uninitialized = true;
+var next_wave = function(){
+    if(((counter%wave_delay)==0)){
+        if(cur_wave.is_finished()){
+        if(choice=="missionimpossible"){
+            GAME_MISSION.add_next_wave();
+            cur_wave = GAME_MISSION.waves.pop();
+            cur_wave.start_wave();
+        }else{
+            cur_wave = GAME_MISSION.waves.pop();
+            cur_wave.start_wave();
+        }
+        }
+    }
+}
+var draw_bullets = function(){
+    for(var bulletidx in Bullet.list){
+        var bullet = Bullet.list[bulletidx];
+        //console.log(bullet);
+        bullet.update();
+        if(bullet.tobeRemoved){
+            delete Bullet.list[bulletidx];
+        }
+        else{
+            bullet.draw();
+        }
+    }
+}
+var draw_enemies = function(){
+    for(var enemyidx in Enemy.list){
+        var enemy = Enemy.list[enemyidx];
+        enemy.update();      
+        if(enemy.tobeRemoved==true){
+            if(enemy.type=="boss"){
+                cur_wave.boss_killed();
+            }
+            delete Enemy.list[enemyidx];
+        }
+        else{
+            enemy.draw();
+        }
+    }
+}
 var drawMap = function(){
   if(uninitialized===true){
        count1 = -h;

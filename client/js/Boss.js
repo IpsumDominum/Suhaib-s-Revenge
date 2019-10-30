@@ -1,22 +1,26 @@
 Brendan = function(x,y){
     var self = Enemy(x,y);        
-    self.hp = 10;
-    self.hpMax = 10;
+    self.hp = 400;
+    self.hpMax = 400;
     self.skin = "brendan";
     self.width = 0.5;
     self.height = 0.5;
     self.spdX = 0;
     self.spdY = 0.005;
     self.traj = 0;
-    self.bulletskin = "magic";
+    self.bulletskin = "kiaora";
     self.bulletdamage = 2;
     self.bulletspeed = 0.02;
+    self.bulletwidth = 0.1;
+    self.bulletheight = 0.08;
     self.delay = 0;
     self.type = "boss";
     var superupdate = self.update;
     self.update = function(){
-        if(self.y <0.4)
+        if(self.y <0.35){
             self.y += self.spdY;
+            self.hp = self.hpMax;
+        }
         //self.x += Math.cos(self.y*10)/50;
         if(self.delay%4==0){
             self.shootBullet("linear");
@@ -46,7 +50,7 @@ FrenchGuy = function(x,y){
     self.counter = 0;
     var superupdate = self.update;
     self.update = function(){
-        if(self.y <0.4){
+        if(self.y <0.35){
             self.y += self.spdY;
             self.hp = self.hpMax;
             return;

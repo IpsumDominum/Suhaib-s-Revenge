@@ -31,4 +31,5 @@ addBulletImage('magic','/client/img/bullet.png');
 addBulletImage('sperm','/client/img/sperm.png');
 addBulletImage('wine','/client/img/wine.png');
 addBulletImage('blackball','/client/img/blackball.png');
+addBulletImage('kiaora','/client/img/kiaora.png');
 

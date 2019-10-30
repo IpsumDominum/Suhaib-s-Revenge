@@ -15,12 +15,14 @@ Enemy = function(x,y){
     self.bulletskin = "magic";
     self.bulletdamage = 1;
     self.bulletspeed = -4;
+    self.bulletwidth = 0.04;
+    self.bulletheight = 0.04;
     self.type = "normal";
     self.update = function(){
         if(self.y>1)
             self.tobeRemoved =true;
         if(self.getCollision(theplayer)){
-            theplayer.hp -= 10;                
+            theplayer.hp -= 1;                
             self.tobeRemoved = true;
             if(theplayer.hp<=0){
                 alert("you died");
@@ -43,6 +45,8 @@ Enemy = function(x,y){
                 bulletskin:self.bulletskin,
                 bulletdamage:self.bulletdamage,            
                 bulletspeed:self.bulletspeed,
+                bulletwidth:self.bulletwidth,
+                bulletheight:self.bulletheight,
             });  
         }
         if(type=="fan"){
@@ -55,6 +59,8 @@ Enemy = function(x,y){
                 bulletskin:self.bulletskin,
                 bulletdamage:self.bulletdamage,            
                 bulletspeed:self.bulletspeed,
+                bulletwidth:self.bulletwidth,
+                bulletheight:self.bulletheight,
             });
             }
         }
